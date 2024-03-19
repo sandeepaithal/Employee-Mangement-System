@@ -1,0 +1,5 @@
+package com.example.employeemanagamentapp.controller;
+
+public class AdminController {
+
+}

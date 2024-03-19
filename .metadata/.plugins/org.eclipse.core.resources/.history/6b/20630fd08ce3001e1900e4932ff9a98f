@@ -1,0 +1,51 @@
+package com.example.employeemanagamentapp.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.example.employeemanagamentapp.dao.AdminDao;
+import com.example.employeemanagamentapp.dto.ResponseStructure;
+import com.example.employeemanagamentapp.model.Admin;
+import com.example.employeemanagamentapp.model.Employee;
+
+
+
+
+@Service
+public class AdminService {
+	@Autowired
+	private AdminDao admindao;
+	
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		structure.setData(admindao.saveAdmin(admin));
+		structure.setMessage("Admin  Saved");
+		structure.setStatusCode(HttpStatus.CREATED.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
+	}
+	public ResponseEntity<ResponseStructure<Admin>> updateEmployee(Admin admin) {
+		Optional<Admin> recAdmin = admindao.findById(admin.getId());
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		if (recAdmin.isPresent()) {
+			Admin dbAdmin = recAdmin.get();
+			dbAdmin.setEmail(admin.getEmail());
+			dbAdmin.setName(admin.getName());
+			dbAdmin.setPassword(admin.getPassword());
+			
+			structure.setMessage("Admin Updated");
+			structure.setData(admindao.saveAdmin(admin));
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.ACCEPTED);
+		}
+		structure.setMessage("Cannot Update Admin as Id is Invalid");
+		structure.setData(null);
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+
+}

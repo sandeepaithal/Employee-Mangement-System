@@ -1,0 +1,71 @@
+package com.example.employeemanagamentapp.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.example.employeemanagamentapp.dao.AdminDao;
+import com.example.employeemanagamentapp.dto.ResponseStructure;
+import com.example.employeemanagamentapp.model.Admin;
+import com.example.employeemanagamentapp.model.Employee;
+
+
+
+
+@Service
+public class AdminService {
+	@Autowired
+	private AdminDao admindao;
+	
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		structure.setData(admindao.saveAdmin(admin));
+		structure.setMessage("Admin  Saved");
+		structure.setStatusCode(HttpStatus.CREATED.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
+	}
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin) {
+		Optional<Admin> recAdmin = admindao.findById(admin.getId());
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		if (recAdmin.isPresent()) {
+			Admin dbAdmin = recAdmin.get();
+			dbAdmin.setEmail(admin.getEmail());
+			dbAdmin.setName(admin.getName());
+			dbAdmin.setPassword(admin.getPassword());
+			
+			structure.setMessage("Admin Updated");
+			structure.setData(admindao.saveAdmin(admin));
+			structure.setStatusCode(HttpStatus.ACCEPTED.value());
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.ACCEPTED);
+		}
+		structure.setMessage("Cannot Update Admin as Id is Invalid");
+		structure.setData(null);
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.NOT_FOUND);
+	}
+	public ResponseEntity<ResponseStructure<Admin>> deleteById(int id) {
+		Optional<Admin> recAdmin = admindao.findById(id);
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		if (recAdmin.isPresent()) {
+			structure.setData(recAdmin.get());
+			structure.setMessage("Admin Found");
+			structure.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.OK);
+		}
+		structure.setData(null);
+		structure.setMessage("Admin Not Found");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+	
+	public ResponseEntity<ResponseStructure<Admin>> findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}

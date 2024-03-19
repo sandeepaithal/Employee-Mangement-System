@@ -1,0 +1,33 @@
+.updateemployee form{
+    display: grid;
+    grid-template-columns: 200px 200px;
+    box-shadow: 0px 2px 4px black;
+    padding: 50px 70px;
+    border-radius: 15px;
+    font-family: cursive;
+}
+
+.updateemployee{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.updateemployee input,label{
+    margin: 10px 0px;
+    border: none;
+}
+.updateemployee input{
+    border-bottom: 2px solid black;
+    outline: none;
+}
+.updateemployee button{
+  
+    width: 100%;
+    background-color: grey;
+    margin-left: 80px;
+    margin-top: 17px;
+    padding: 5px ;
+    border-radius: 10px;
+} 

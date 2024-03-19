@@ -1,0 +1,9 @@
+.findemployee h2{
+    display: flex;
+    justify-content: center;
+}
+.findemployee input{
+    margin-left: 500px;
+    justify-content: center;
+    align-items: center;
+}

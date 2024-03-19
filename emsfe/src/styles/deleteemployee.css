@@ -1,0 +1,9 @@
+.deleteemployee h2{
+    display: flex;
+    justify-content: center;
+}
+.deleteemployee input{
+    margin-left: 500px;
+    justify-content: center;
+    align-items: center;
+}

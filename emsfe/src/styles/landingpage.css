@@ -1,0 +1,27 @@
+
+.landingpage img{ 
+    height: 220px;
+    
+} 
+.landingpage{
+    padding: 10px;
+    
+}
+.landingpage h1{
+   display: flex;
+   justify-content: center;
+}
+.landingpage button{
+    padding:5px;
+    border-radius: 6px;
+   background-color: darkred;
+  
+}
+.landingpage a{
+    text-decoration: none;
+    color: white;
+}
+.employee{
+    padding: 10px;
+    
+}

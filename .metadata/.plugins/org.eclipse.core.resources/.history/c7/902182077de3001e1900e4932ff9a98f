@@ -1,0 +1,28 @@
+package com.example.employeemanagamentapp.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.example.employeemanagamentapp.dao.AdminDao;
+import com.example.employeemanagamentapp.dto.ResponseStructure;
+import com.example.employeemanagamentapp.model.Admin;
+
+
+
+
+@Service
+public class AdminService {
+	@Autowired
+	private AdminDao admindao;
+	
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+		ResponseStructure<Admin> structure = new ResponseStructure<>();
+		structure.setData(admindao.saveAdmin(admin));
+		structure.setMessage("Admin  Saved");
+		structure.setStatusCode(HttpStatus.CREATED.value());
+		return new ResponseEntity<ResponseStructure<Admin>>(structure, HttpStatus.CREATED);
+	}
+
+}

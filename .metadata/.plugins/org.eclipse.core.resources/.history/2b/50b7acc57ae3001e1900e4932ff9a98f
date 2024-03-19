@@ -1,0 +1,22 @@
+package com.example.employeemanagamentapp.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.employeemanagamentapp.model.Admin;
+import com.example.employeemanagamentapp.model.Employee;
+import com.example.employeemanagamentapp.repository.AdminRepository;
+
+@Repository
+public class AdminDao {
+
+	@Autowired
+	private AdminRepository adminrepository;
+	
+	public Admin saveAdmin(Admin admin) {
+   	 return adminrepository.save(admin);
+   }
+	 public Admin UpdateEmployee(Admin admin) {
+	   	 return adminrepository.save(admin);
+	   }
+}

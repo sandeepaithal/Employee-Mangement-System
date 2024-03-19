@@ -1,0 +1,5 @@
+package com.example.employeemanagamentapp.model;
+
+public class Admin {
+
+}

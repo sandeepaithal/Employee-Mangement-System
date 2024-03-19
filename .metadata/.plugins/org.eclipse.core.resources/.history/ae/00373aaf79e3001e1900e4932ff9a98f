@@ -1,0 +1,5 @@
+package com.example.employeemanagamentapp.repository;
+
+public class AdminRepository {
+
+}
